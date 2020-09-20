@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import DogCardContainer from '../containers/DogCardContainer';
-import * as API from '../adaptors/API';
+
+import * as API from '../services/API';
 
 const DogIndexPage = props => {
 
     const [dogs, setDogs] = useState();
     const [loading, setLoading] = useState(true);
 
-useEffect(() => {
-    API.getDogs()
-    .then(resp => {
-        setDogs(resp.dogs)
-        setLoading(false);
-    })
-}, []);
+    useEffect(() => {
+        API.getDogs()
+        .then(JsonResp => {
+            setDogs(JsonResp.dogs)
+            setLoading(false);
+        })
+    }, []);
 
     return (
         loading ? <div>Loading...</div> :
