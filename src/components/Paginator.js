@@ -1,46 +1,64 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 
 const Paginator = ({ itemsPerPage, children, showPageCount, style  }) => {
 
-    const [selectedPage, setSelectedPage] = useState(1);
+    const makePageArray = numberOfPages => {
+        const emptyArray = new Array(numberOfPages).fill();
+
+        let start = 0;
+
+        return emptyArray.map(i => {
+            start++;
+            return i = start;
+        });
+
+    };
+
+    let hash;
+    if (window.location.hash) {
+        hash = window.location.hash.replace('#', '');
+    }
+
+    const [selectedPage, setSelectedPage] = useState(hash || 1);
+
+    useEffect(() => {
+        window.addEventListener('hashchange', () => setSelectedPage(window.location.hash.replace('#', '')))
+        return window.removeEventListener('hashchange', () => setSelectedPage(window.location.hash.replace('#', '')))
+    });
 
     const renderPageNumbers = (items, number) => {
         const numberOfPages = Math.ceil(items.length / number);
-
-        let pageNumbers = [];
-
-        for (let i = 0; i < numberOfPages; i++) {
-            pageNumbers = [...pageNumbers, i + 1]
-        }
-
         return (
-            pageNumbers.map(
+            makePageArray(numberOfPages).map(
                 pageNumber => (
-                    <span
+                    <li
                         key={pageNumber}
                         style={{margin: '0 .5rem', cursor: 'pointer'}}
                         onClick={() => {
-                            setSelectedPage(pageNumber)
+                            // setSelectedPage(pageNumber)
+                            window.location.hash = pageNumber;
                         }}
                     >
                         {pageNumber}
-                    </span>)
+                    </li>)
             )
         );
     };
 
+    const startIndex = itemsPerPage * (selectedPage - 1);
+    const endIndex = startIndex + itemsPerPage;
+
     return (
         <>
             <div className='paginator-container' style={style}>
-                {children.filter((child, index) => {
-                    const startIndex = itemsPerPage * (selectedPage - 1)
-                    return index >= startIndex && index < (startIndex + itemsPerPage)
-                })}
+                {children.slice(startIndex, endIndex)}
             </div>
             <div className="page-selector">
-                { renderPageNumbers(children, itemsPerPage) }
+                <ul>
+                    {renderPageNumbers(children, itemsPerPage) }
+                </ul>
             </div>
             {showPageCount && <div> {`Showing ${itemsPerPage} per page`}  </div>}
         </>
