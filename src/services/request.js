@@ -1,4 +1,4 @@
-const URL = 'https://ding-dog-api.netlify.app/.netlify/functions/index'
+const URL = 'https://ding-dog-api.netlify.app/.netlify/functions/index';
 
 export const getDefaultConfiguration = {
     method: 'GET',
@@ -6,12 +6,12 @@ export const getDefaultConfiguration = {
 };
 
 export const get = async (path, options = {}) => {
-     const resp = await fetch(`${options.endpoint || URL}${path}`,
-        {
-            ...getDefaultConfiguration,
-            ...options,
-        }
-    );
+    const resp = await fetch(`${options.endpoint || URL}${path}`, {
+        ...getDefaultConfiguration,
+        ...options,
+    });
 
-    return resp.json()
+    console.log(resp.json());
+
+    return resp.json();
 };

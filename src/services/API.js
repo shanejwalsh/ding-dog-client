@@ -3,4 +3,3 @@
 import { get } from './request';
 
 export const getDogs = () => get('/dogs');
-

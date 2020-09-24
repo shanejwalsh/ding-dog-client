@@ -6,21 +6,18 @@ import { history } from '../services';
 
 export default class Root extends Component {
     static propTypes = {
-        prop: PropTypes
-    }
+        prop: PropTypes,
+    };
 
     render() {
-
         return (
             <Router history={history}>
-                <Switch>
-                    {this.props.routes}
-                </Switch>
+                <Switch>{this.props.routes}</Switch>
             </Router>
         );
-    };
-};
+    }
+}
 
 Root.propTypes = {
     routes: PropTypes.object,
-}
+};
