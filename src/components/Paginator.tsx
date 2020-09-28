@@ -1,29 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, {
+    useState,
+    useEffect,
+    FunctionComponent,
+    ReactNodeArray
+} from 'react';
 
-const Paginator = ({ itemsPerPage, children, showPageCount, style }) => {
-    const makePageArray = numberOfPages => {
-        const emptyArray = new Array(numberOfPages).fill();
+interface PaginatorProps {
+    itemsPerPage: number,
+    style: object,
+    children: ReactNodeArray
+    showPageCount?: boolean,
+};
+
+const Paginator: FunctionComponent<PaginatorProps> = ({ itemsPerPage, children, showPageCount, style }) => {
+
+    const makePageArray = (numberOfPages: number) => {
+        const emptyArray = new Array(numberOfPages).fill(null);
 
         let start = 0;
 
-        return emptyArray.map(placeholder => {
+        return emptyArray.map(i => {
             start++;
-            return (placeholder = start);
+            return i = start.toString();
         });
     };
 
     let hash;
+
     if (window.location.hash) {
         hash = +window.location.hash.replace('#', '');
     }
 
-    const [selectedPage, setSelectedPage] = useState(hash || 1);
+    const [selectedPage, setSelectedPage] = useState(hash || '1');
 
     useEffect(() => {
         window.addEventListener('hashchange', hashChangeHandler);
         return () =>
-            console.log('unmount') ||
             window.removeEventListener('hashchange', hashChangeHandler);
     }, []);
 
@@ -31,17 +43,17 @@ const Paginator = ({ itemsPerPage, children, showPageCount, style }) => {
         setSelectedPage(+window.location.hash.replace('#', ''));
     };
 
-    const renderPageNumbers = (items, number) => {
+    const renderPageNumbers = (items: ReactNodeArray, number: number) => {
         const numberOfPages = Math.ceil(items.length / number);
-        return makePageArray(numberOfPages).map(pageNumber => (
-            <li
-                key={pageNumber}
-                style={{
+        return makePageArray(numberOfPages).map((pageNumber, index) => {
+            return (
+                <li
+                    key={pageNumber}
+                    style={{
                     border: 'solid 0.25px grey',
-                    borderLeft: pageNumber === 1 ? 'solid 0.25px grey' : 0,
+                    borderLeft: index === 0 ? 'solid 0.25px grey' : 0,
                     padding: '.25rem 0',
                     width: '2rem',
-                    // margin: '0 .5rem',
                     cursor: 'pointer',
                     color:
                         selectedPage === pageNumber
@@ -49,15 +61,15 @@ const Paginator = ({ itemsPerPage, children, showPageCount, style }) => {
                             : 'black',
                 }}
                 onClick={() => {
-                    window.location.hash = pageNumber;
+                    window.location.hash = pageNumber
                 }}
             >
                 {pageNumber}
-            </li>
-        ));
+            </li>)
+        });
     };
 
-    const startIndex = itemsPerPage * (selectedPage - 1);
+    const startIndex = itemsPerPage * (+selectedPage - 1);
     const endIndex = startIndex + itemsPerPage;
 
     return (
@@ -69,7 +81,7 @@ const Paginator = ({ itemsPerPage, children, showPageCount, style }) => {
                 <ul
                     style={{
                         display: 'flex',
-                        flexWrap: 'wrap,',
+                        flexWrap: 'wrap',
                         listStyle: 'none',
                         padding: 0,
                     }}
@@ -82,12 +94,8 @@ const Paginator = ({ itemsPerPage, children, showPageCount, style }) => {
     );
 };
 
-Paginator.propTypes = {
-    itemsPerPage: PropTypes.number,
-};
-
 Paginator.defaultProps = {
-    itemsPerPage: 6,
+    itemsPerPage: 8,
 };
 
 export default Paginator;

@@ -1,9 +1,21 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 
 import { dateParser } from '../libs/helpers';
 
-function DogCard({ name, breed, imgSrc, location, dateAdded }) {
+interface DogCardProps {
+    name: string,
+    breed: string,
+    imgSrc: string,
+    location: string,
+    dateAdded: Date,
+}
+
+const DogCard: React.FunctionComponent<DogCardProps> = ({
+        name,
+        breed,
+        imgSrc,
+        location, dateAdded
+    }) => {
     const [showFront, setShowFront] = useState(true);
     return (
         <div
@@ -15,10 +27,9 @@ function DogCard({ name, breed, imgSrc, location, dateAdded }) {
                 <>
                     <img
                         loading="lazy"
-                        style={{ height: '150px' }}
-                        // data-src={imgSrc}
                         src={imgSrc}
                         alt={`${name}`}
+                        height='150px'
                     />
                     <h1>{name}</h1>
                     <p>{`Added on ${dateParser(dateAdded)}`}</p>
@@ -31,13 +42,6 @@ function DogCard({ name, breed, imgSrc, location, dateAdded }) {
             )}
         </div>
     );
-}
-
-DogCard.propTypes = {
-    name: PropTypes.string,
-    breed: PropTypes.string,
-    imgSrc: PropTypes.string,
-    location: PropTypes.string,
 };
 
 const style = {
