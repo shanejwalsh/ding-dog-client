@@ -11,7 +11,5 @@ export const get = async (path, options = {}) => {
         ...options,
     });
 
-    console.log(resp.json());
-
     return resp.json();
 };
