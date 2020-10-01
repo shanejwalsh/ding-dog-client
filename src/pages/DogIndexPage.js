@@ -1,41 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import Loading from '../components/Loading';
 import DogCardContainer from '../containers/DogCardContainer';
+import Link from '../components/Link';
+import PageHeading from '../components/PageHeading';
 
 import * as API from '../services/API';
 
-const PageTitle = ({ title }) => {
-    return (
-        <h1
-            className="page-title"
-            style={{
-                fontSize: '4.5rem',
-                textAlign: 'left',
-                marginTop: 0,
-                marginBottom: '0.5em',
-            }}
-        >
-            {title}
-        </h1>
-    );
-};
-
-export const Link = ({ href, alt, children }) => {
-    return (
-        <a
-            style={{
-                textDecoration: 'none',
-                color: '#333333',
-                borderBottom: '1.5px #25dca3 solid',
-            }}
-            href={href}
-            alt={alt}
-        >
-            {children}
-        </a>
-    );
-};
-
-const DogIndexPage = props => {
+const DogIndexPage = () => {
     const [dogs, setDogs] = useState();
     const [loading, setLoading] = useState(true);
 
@@ -63,7 +34,7 @@ const DogIndexPage = props => {
 
     return (
         <div className="dog-index-page" style={{ padding: '3rem' }}>
-            <PageTitle title={'Ding Dog'} />
+            <PageHeading title={'Ding Dog'} />
 
             <div style={{ textAlign: 'left', width: '60%', lineHeight: 1.7 }}>
                 <p>
@@ -72,23 +43,21 @@ const DogIndexPage = props => {
                 </p>
                 <p>
                     You can browse through dogs that currently available on the
-                    <Link href=""> Dogs Trust</Link> site, save your favourites
+                    <Link path='/'> Dogs Trust</Link> site, save your favourites
                     and
-                    <Link href=""> set up alerts</Link> when new dogs become
+                    <Link path='/signup'> set up alerts</Link> when new dogs become
                     available.
                 </p>
                 <p>
-                    You can browse through dogs that currently available on the{' '}
-                    <Link href="">Dogs Trust</Link> site, save your favourites
-                    and{' '}
-                    <Link href="">
+                    Or, if your heart needs warming you can browse through dogs
+                    <Link href='/'>
                         who have already found their forever homes.
                     </Link>
                 </p>
             </div>
 
             {loading ? (
-                <h1>Loading...</h1>
+                <Loading loadingColor={'yellow'}/>
             ) : (
                 <div>
                     <DogCardContainer dogs={dogs} />

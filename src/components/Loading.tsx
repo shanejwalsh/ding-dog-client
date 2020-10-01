@@ -1,16 +1,13 @@
 import React from 'react';
 
 interface LoadingProps {
-    text: string,
+    text: string;
+    LoadingColor: 'red' | 'green';
 };
 
-const Loading: React.FunctionComponent<LoadingProps> = props =>  {
-    return (
-        <div>
-            Loading...
-        </div>
-    )
-}
+const Loading = ({ text, LoadingColor }: LoadingProps) => {
+    return <div style={{ color: LoadingColor }}>Loading...</div>;
+};
 
 export default Loading;
 

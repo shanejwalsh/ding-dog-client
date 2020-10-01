@@ -1,18 +1,17 @@
 import React, {
     useState,
     useEffect,
-    FunctionComponent,
     ReactNodeArray
 } from 'react';
 
 interface PaginatorProps {
-    itemsPerPage: number,
-    style: object,
-    children: ReactNodeArray
-    showPageCount?: boolean,
+    itemsPerPage: number;
+    style: object;
+    children: ReactNodeArray;
+    showPageCount?: boolean;
 };
 
-const Paginator: FunctionComponent<PaginatorProps> = ({ itemsPerPage, children, showPageCount, style }) => {
+const Paginator = ({ itemsPerPage, children, showPageCount, style }: PaginatorProps) => {
 
     const makePageArray = (numberOfPages: number) => {
         const emptyArray = new Array(numberOfPages).fill(null);
@@ -31,7 +30,7 @@ const Paginator: FunctionComponent<PaginatorProps> = ({ itemsPerPage, children, 
         hash = +window.location.hash.replace('#', '');
     }
 
-    const [selectedPage, setSelectedPage] = useState(hash || '1');
+    const [selectedPage, setSelectedPage] = useState(hash || 1);
 
     useEffect(() => {
         window.addEventListener('hashchange', hashChangeHandler);
@@ -50,27 +49,28 @@ const Paginator: FunctionComponent<PaginatorProps> = ({ itemsPerPage, children, 
                 <li
                     key={pageNumber}
                     style={{
-                    border: 'solid 0.25px grey',
-                    borderLeft: index === 0 ? 'solid 0.25px grey' : 0,
-                    padding: '.25rem 0',
-                    width: '2rem',
-                    cursor: 'pointer',
-                    color:
-                        selectedPage === pageNumber
-                            ? 'rgb(37, 220, 163)'
-                            : 'black',
-                }}
-                onClick={() => {
-                    window.location.hash = pageNumber
-                }}
-            >
-                {pageNumber}
-            </li>)
+                        border: 'solid 0.25px grey',
+                        borderLeft: index === 0 ? 'solid 0.25px grey' : 0,
+                        padding: '.25rem 0',
+                        width: '2rem',
+                        cursor: 'pointer',
+                        color:
+                            selectedPage === +pageNumber
+                                ? 'rgb(37, 220, 163)'
+                                : 'black',
+                    }}
+                    onClick={() => {
+                        window.location.hash = pageNumber;
+                    }}
+                >
+                    {pageNumber}
+                </li>
+            );
         });
     };
 
-    const startIndex = itemsPerPage * (+selectedPage - 1);
-    const endIndex = startIndex + itemsPerPage;
+    const startIndex: number = itemsPerPage * (+selectedPage - 1);
+    const endIndex: number = startIndex + itemsPerPage;
 
     return (
         <>
@@ -96,6 +96,10 @@ const Paginator: FunctionComponent<PaginatorProps> = ({ itemsPerPage, children, 
 
 Paginator.defaultProps = {
     itemsPerPage: 8,
+    style: {
+        display: 'flex',
+        flexWrap: 'wrap',
+    },
 };
 
 export default Paginator;

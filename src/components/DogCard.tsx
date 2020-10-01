@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 
 import { dateParser } from '../libs/helpers';
 
@@ -8,19 +9,31 @@ interface DogCardProps {
     imgSrc: string,
     location: string,
     dateAdded: Date,
-}
+};
 
-const DogCard: React.FunctionComponent<DogCardProps> = ({
+const Card = styled.div`
+    background: #fff;
+    border-radius: 10px;
+    width: 250px;
+    height: 300px;
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+    box-shadow: 0px 0px 9px 1px rgb(0, 0, 0, 0.1);
+    cursor: pointer;
+`;
+
+const DogCard = ({
         name,
         breed,
         imgSrc,
-        location, dateAdded
-    }) => {
-    const [showFront, setShowFront] = useState(true);
+        location,
+        dateAdded,
+    }:DogCardProps ) => {
+
+        const [showFront, setShowFront] = useState(true);
     return (
-        <div
+        <Card
             className="dog-card"
-            style={style}
             onClick={() => setShowFront(!showFront)}
         >
             {showFront ? (
@@ -32,28 +45,17 @@ const DogCard: React.FunctionComponent<DogCardProps> = ({
                         height='150px'
                     />
                     <h1>{name}</h1>
+                    <h3> {breed} </h3>
                     <p>{`Added on ${dateParser(dateAdded)}`}</p>
                 </>
             ) : (
-                <div>
+                <Card>
                     <h2> {breed} </h2>
                     <p> {location}</p>
-                </div>
+                </Card>
             )}
-        </div>
+        </Card>
     );
-};
-
-const style = {
-    background: '#fff',
-    borderRadius: '10px',
-    width: '250px',
-    height: '300px',
-    padding: '1rem 0',
-    marginBottom: '2rem',
-    boxShadow: '0px 0px 9px 1px rgb(0, 0, 0, 0.1)',
-    marginRight: '15px',
-    cursor: 'pointer',
 };
 
 export default DogCard;

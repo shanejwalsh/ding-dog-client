@@ -1,7 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import DogCard from '../components/DogCard';
 import Paginator from '../components/Paginator';
+import styled from 'styled-components';
+
+const Container = styled.div`
+    margin-left: 3rem;
+`;
 
 const renderDogCards = (dogs = []) => {
     return dogs.map(dog => {
@@ -23,34 +27,22 @@ const renderDogCards = (dogs = []) => {
 const DogCardContainer = ({ dogs }) => {
     return (
         <>
-            <div style={wrapperStyle}>
-                <div className="dog-card-container" style={style}>
+            <div>
+                <Container className="dog-card-container">
                     <Paginator
                         itemsPerPage={8}
                         style={{
                             display: 'flex',
                             flexWrap: 'wrap',
-                            alignContent: 'flex-end',
+                            gap: '1.25rem',
                         }}
                     >
                         {renderDogCards(dogs)}
                     </Paginator>
-                </div>
+                </Container>
             </div>
         </>
     );
-};
-
-const wrapperStyle = {
-    display: 'flex',
-    justifyContent: 'flex-end',
-};
-
-const style = {
-    padding: '3rem',
-    display: 'flex',
-    flexWrap: 'wrap',
-    width: '100 %',
 };
 
 export default DogCardContainer;

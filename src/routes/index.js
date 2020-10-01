@@ -1,28 +1,26 @@
 import React from 'react';
-import { Route } from 'react-router';
-import paths from './paths';
+import { Route, Switch } from 'react-router';
+import Link from '../components/Link';
+import paths from './paths'
 
-import DogIndexPage, { Link } from '../pages/DogIndexPage';
-
-export const Home = () => {
-    return <div style={{ color: 'black' }}>This will be the home page</div>;
-};
+import DogIndexPage from '../pages/DogIndexPage';
+import HomePage from '../pages/HomePage'
 
 export const NotFound = () => {
     return (
         <div style={{ color: 'black' }}>
-            <p>Thiis is not the route youre looking for</p>
+            <p>This is not the route youre looking for</p>
 
-            <p>
-                <Link href=""> Take me home James</Link>
-            </p>
+
+            <Link>Take me home James</Link>
         </div>
     );
 };
 
 export default (
-    <Route path="/">
-        <Route exact path={paths.home} component={Home} />
+    <Switch>
+        <Route exact path={paths.home} component={HomePage} />
         <Route exact path={paths.dogsIndex} component={DogIndexPage} />
-    </Route>
+        <Route component={NotFound} />
+    </Switch>
 );

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Router, Switch } from 'react-router';
+import { Router } from 'react-router';
 
 import { history } from '../services';
 
@@ -11,8 +11,10 @@ export default class Root extends Component {
 
     render() {
         return (
-            <Router history={history}>
-                <Switch>{this.props.routes}</Switch>
+            <Router
+            history={history}
+            >
+                {this.props.routes}
             </Router>
         );
     }

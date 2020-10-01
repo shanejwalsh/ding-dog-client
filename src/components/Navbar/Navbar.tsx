@@ -1,11 +1,11 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+
+import navItems from './navItems';
 import { History } from 'history';
-
 import { navigate } from '../../routes/paths';
-
 import { titleCase } from '../../libs/helpers';
-
+import { paths } from '../../routes/paths';
 interface NavbarProps {
     history: History;
 }
@@ -20,47 +20,28 @@ const Nav = styled.div`
     font-size: 1.5rem;
 `;
 
-// const Link = styled.a`
-//     background: #F3F2F2;
-//     display: flex;
-//     align-items: center;
-//     /* justify-content: flex-end; */
-//     min-height: 50px;
-//     padding: 0 10rem;
-//     font-size: 1.5rem;
-// `;
-
-const Link = styled.a`
+const NavLink = styled.a`
     margin: 0 1rem;
     cursor: pointer;
+    text-decoration: none;
+    color: #000;
 `;
 
-
-const navItems = [
-    {
-        text: 'home',
-        route: 'home',
-    },
-    {
-        text: 'dogs',
-        route: 'dogsIndex',
-    },
-];
-
-const Navbar: FunctionComponent<NavbarProps> = ({ history }) => {
+const Navbar = ({ history }: NavbarProps) => {
     return (
         <Nav>
-
-            {
-                navItems.map(item => {
-                    return (
-                        <Link
-                            onClick={() => navigate(history, item.route)}>
-                            {titleCase(item.text)}
-                        </Link>
-                    )
-                })
-            }
+            {navItems.map(item => {
+                // console.log('%cNavbar.tsx line:31 paths[]', 'color: #007acc;', paths[item.route]);
+                return (
+                    <NavLink
+                        key={item.text}
+                        href={paths[item.route]}
+                        onClick={() => navigate(history, item.route)}
+                    >
+                        {titleCase(item.text)}
+                    </NavLink>
+                );
+            })}
         </Nav>
     );
 };
