@@ -39,7 +39,7 @@ const Paginator = ({ itemsPerPage, children, showPageCount, style }: PaginatorPr
     }, []);
 
     const hashChangeHandler = () => {
-        setSelectedPage(+window.location.hash.replace('#', ''));
+        setSelectedPage(+window.location.hash.replace('#', '') || 1);
     };
 
     const renderPageNumbers = (items: ReactNodeArray, number: number) => {

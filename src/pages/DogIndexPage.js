@@ -42,17 +42,8 @@ const DogIndexPage = () => {
                     one.
                 </p>
                 <p>
-                    You can browse through dogs that currently available on the
-                    <Link path='/'> Dogs Trust</Link> site, save your favourites
-                    and
-                    <Link path='/signup'> set up alerts</Link> when new dogs become
-                    available.
-                </p>
-                <p>
-                    Or, if your heart needs warming you can browse through dogs
-                    <Link href='/'>
-                        who have already found their forever homes.
-                    </Link>
+                    These dogs currently need to find their forever homes.
+                    Click on any dog for more information and to arrange an appointment to view or  adopt.
                 </p>
             </div>
 

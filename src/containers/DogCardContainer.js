@@ -30,7 +30,7 @@ const DogCardContainer = ({ dogs }) => {
             <div>
                 <Container className="dog-card-container">
                     <Paginator
-                        itemsPerPage={8}
+                        itemsPerPage={10}
                         style={{
                             display: 'flex',
                             flexWrap: 'wrap',

@@ -1,6 +1,6 @@
 interface NavItem {
     text: string;
-    route: 'home'|'dogsIndex'|'signUp';
+    route: 'home' | 'dogsIndex' | 'signUp' | 'adoptedDogsIndex';
 }
 
 const navItems: Array<NavItem> = [
@@ -9,8 +9,12 @@ const navItems: Array<NavItem> = [
         route: 'home',
     },
     {
-        text: 'dogs',
+        text: 'available dogs',
         route: 'dogsIndex',
+    },
+    {
+        text: 'adopted dogs',
+        route: 'adoptedDogsIndex',
     },
 ];
 
