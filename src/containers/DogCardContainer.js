@@ -24,7 +24,12 @@ const renderDogCards = (dogs = []) => {
     });
 };
 
-const DogCardContainer = ({ dogs }) => {
+const DogCardContainer = ({ dogs, showAdopted }) => {
+
+    const dogsToDisplay = showAdopted ?
+    dogs.filter(dog => dog.isAdopted)
+    : dogs.filter(dog => !dog.isAdopted);
+
     return (
         <>
             <div>
@@ -37,7 +42,7 @@ const DogCardContainer = ({ dogs }) => {
                             gap: '1.25rem',
                         }}
                     >
-                        {renderDogCards(dogs)}
+                        {renderDogCards(dogsToDisplay)}
                     </Paginator>
                 </Container>
             </div>
