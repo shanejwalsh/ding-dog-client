@@ -3,12 +3,12 @@ import styled from 'styled-components';
 
 import { dateParser } from '../libs/helpers';
 
-interface DogCardProps {
-    name: string,
-    breed: string,
-    imgSrc: string,
-    location: string,
-    dateAdded: Date,
+interface T {
+    name: string;
+    breed: string;
+    imgSrc: string;
+    location: string;
+    dateAdded: Date;
 };
 
 const Card = styled.div`
@@ -22,28 +22,14 @@ const Card = styled.div`
     cursor: pointer;
 `;
 
-const DogCard = ({
-        name,
-        breed,
-        imgSrc,
-        location,
-        dateAdded,
-    }:DogCardProps ) => {
+const DogCard = ({ name, breed, imgSrc, location, dateAdded }: T) => {
+    const [showFront, setShowFront] = useState(true);
 
-        const [showFront, setShowFront] = useState(true);
     return (
-        <Card
-            className="dog-card"
-            onClick={() => setShowFront(!showFront)}
-        >
+        <Card className="dog-card" onClick={() => setShowFront(!showFront)}>
             {showFront ? (
                 <>
-                    <img
-                        loading="lazy"
-                        src={imgSrc}
-                        alt={`${name}`}
-                        height='150px'
-                    />
+                    <img loading="lazy" src={imgSrc} alt={`${name}`} height="150px" />
                     <h1>{name}</h1>
                     <h3> {breed} </h3>
                     <p>{`Added on ${dateParser(dateAdded)}`}</p>
