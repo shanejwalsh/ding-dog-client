@@ -5,13 +5,9 @@ export const dateParser = (
     return new Intl.DateTimeFormat(locale).format(new Date(date));
 };
 
-export const titleCase = (sentence: string): string => {
-    return sentence
-        .split(' ')
-        .map(
-            word =>
-                (word = `${word.substr(0, 1).toUpperCase()}${word.substr(1)}`)
-        )
-        .join(' ');
-};
+const capitalizeWord = (word: string): string =>
+    (word = `${word.substr(0, 1).toUpperCase()}${word.substr(1)}`);
+
+export const titleCase = (sentence: string): string =>
+    sentence.split(' ').map(capitalizeWord).join(' ');
 

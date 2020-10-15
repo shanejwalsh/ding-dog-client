@@ -9,7 +9,17 @@ const Container = styled.div`
 
 const renderDogCards = (dogs = []) => {
     return dogs.map(dog => {
-        const { _id, imgSrc, name, location, breed, addedAt, isAdopted, adoptedAt } = dog;
+        const {
+             _id,
+             imgSrc,
+             name,
+             location,
+             breed,
+             addedAt,
+             isAdopted,
+             adoptedAt
+        } = dog;
+
         return (
             <DogCard
                 key={_id}
@@ -29,8 +39,8 @@ const renderDogCards = (dogs = []) => {
 const DogCardContainer = ({ dogs, showAdopted }) => {
 
     const dogsToDisplay = showAdopted ?
-    dogs.filter(dog => dog.isAdopted)
-    : dogs.filter(dog => !dog.isAdopted);
+        dogs.filter(dog => dog.isAdopted)
+        : dogs.filter(dog => !dog.isAdopted);
 
     return (
         <>
