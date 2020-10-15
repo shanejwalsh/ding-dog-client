@@ -8,7 +8,9 @@ interface T {
     breed: string;
     imgSrc: string;
     location: string;
+    isAdopted: boolean;
     dateAdded: Date;
+    adoptedAt: Date;
 };
 
 const Card = styled.div`
@@ -22,7 +24,9 @@ const Card = styled.div`
     cursor: pointer;
 `;
 
-const DogCard = ({ name, breed, imgSrc, location, dateAdded }: T) => {
+const DogCard = ({ name, breed, imgSrc, location, dateAdded, isAdopted, adoptedAt  }: T) => {
+
+    console.log('%cDogCard.tsx line:29 isAdopted', 'color: #007acc;', isAdopted);
     const [showFront, setShowFront] = useState(true);
 
     return (
@@ -32,7 +36,13 @@ const DogCard = ({ name, breed, imgSrc, location, dateAdded }: T) => {
                     <img loading="lazy" src={imgSrc} alt={`${name}`} height="150px" />
                     <h1>{name}</h1>
                     <h3> {breed} </h3>
-                    <p>{`Added on ${dateParser(dateAdded)}`}</p>
+                    {
+                        isAdopted ?
+                        <p>{`Apopted on ${dateParser(adoptedAt)}`}</p>
+
+                        : <p>{`Added on ${dateParser(dateAdded)}`}</p>
+
+                    }
                 </>
             ) : (
                 <Card>

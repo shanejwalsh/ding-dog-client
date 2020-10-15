@@ -1,4 +1,4 @@
-const URL = 'https://ding-dog-api.netlify.app/.netlify/functions/index';
+const URL = 'https://ding-dog-api.netlify.app/.netlify/functions/app';
 
 // const URL = 'http://localhost:9000/.netlify/functions/app'
 

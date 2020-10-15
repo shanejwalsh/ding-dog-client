@@ -9,7 +9,7 @@ const Container = styled.div`
 
 const renderDogCards = (dogs = []) => {
     return dogs.map(dog => {
-        const { _id, imgSrc, name, location, breed, addedAt } = dog;
+        const { _id, imgSrc, name, location, breed, addedAt, isAdopted, adoptedAt } = dog;
         return (
             <DogCard
                 key={_id}
@@ -18,6 +18,8 @@ const renderDogCards = (dogs = []) => {
                 imgSrc={imgSrc}
                 breed={breed}
                 dateAdded={addedAt}
+                isAdopted={isAdopted}
+                adoptedAt={adoptedAt}
                 onClick={name}
             />
         );
