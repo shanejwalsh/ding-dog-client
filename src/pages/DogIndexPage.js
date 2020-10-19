@@ -1,35 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import Loading from '../components/Loading';
 import DogCardContainer from '../containers/DogCardContainer';
-import Link from '../components/Link';
 import PageHeading from '../components/PageHeading';
 
 import * as API from '../services/API';
 
+const isAdoptedPage = window.location.pathname === '/adopted-dogs';
+
 const DogIndexPage = () => {
+
     const [dogs, setDogs] = useState();
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const localDogs = window.sessionStorage.getItem('_dog_informations');
-        if (localDogs) {
-            setDogs(JSON.parse(localDogs));
-            setLoading(false);
-        } else {
-            API.getDogs()
-                .then(JsonResp => {
-                    setDogs(JsonResp.dogs);
-                    window.sessionStorage.setItem(
-                        '_dog_informations',
-                        JSON.stringify(JsonResp.dogs)
-                    );
-                    setLoading(false);
-                })
-                .catch(error => {
-                    // show error component
-                    console.log(error);
-                });
+        const fetchData = async () => {
+            try {
+                const { dogs } = await API.getDogs();
+                setDogs(dogs)
+                setLoading(false);
+
+            } catch(error) {
+                console.log(error);
+            }
         }
+        fetchData();
     }, []);
 
     return (
@@ -41,17 +35,26 @@ const DogIndexPage = () => {
                     Ding Dog helps you find a home for a dog that really needs
                     one.
                 </p>
-                <p>
-                    These dogs currently need to find their forever homes.
-                    Click on any dog for more information and to arrange an appointment to view or  adopt.
-                </p>
+
+                {
+                    isAdoptedPage
+                    ?
+                    <p>
+                        Definitely alive dogs
+                    </p>
+                    :
+                    <p>
+                        These dogs currently need to find their forever homes.
+                        Click on any dog for more information and to arrange an appointment to view or  adopt.
+                    </p>
+                }
             </div>
 
             {loading ? (
-                <Loading loadingColor={'yellow'}/>
+                <Loading/>
             ) : (
                 <div>
-                    <DogCardContainer dogs={dogs} />
+                    <DogCardContainer dogs={dogs} showAdopted={isAdoptedPage} />
                 </div>
             )}
         </div>

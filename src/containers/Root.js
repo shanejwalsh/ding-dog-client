@@ -12,7 +12,7 @@ export default class Root extends Component {
     render() {
         return (
             <Router
-            history={history}
+                history={history}
             >
                 {this.props.routes}
             </Router>

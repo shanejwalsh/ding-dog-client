@@ -20,7 +20,7 @@ const Nav = styled.div`
     font-size: 1.5rem;
 `;
 
-const NavLink = styled.a`
+const StyledLink = styled.a`
     margin: 0 1rem;
     cursor: pointer;
     text-decoration: none;
@@ -31,15 +31,14 @@ const Navbar = ({ history }: NavbarProps) => {
     return (
         <Nav>
             {navItems.map(item => {
-                // console.log('%cNavbar.tsx line:31 paths[]', 'color: #007acc;', paths[item.route]);
                 return (
-                    <NavLink
+                    <StyledLink
                         key={item.text}
                         href={paths[item.route]}
                         onClick={() => navigate(history, item.route)}
                     >
                         {titleCase(item.text)}
-                    </NavLink>
+                    </StyledLink>
                 );
             })}
         </Nav>

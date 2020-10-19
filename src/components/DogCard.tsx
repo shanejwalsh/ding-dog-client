@@ -24,9 +24,7 @@ const Card = styled.div`
     cursor: pointer;
 `;
 
-const DogCard = ({ name, breed, imgSrc, location, dateAdded, isAdopted, adoptedAt  }: T) => {
-
-    console.log('%cDogCard.tsx line:29 isAdopted', 'color: #007acc;', isAdopted);
+const DogCard = ({ name, breed, imgSrc, location, dateAdded, isAdopted, adoptedAt }: T) => {
     const [showFront, setShowFront] = useState(true);
 
     return (
@@ -36,13 +34,11 @@ const DogCard = ({ name, breed, imgSrc, location, dateAdded, isAdopted, adoptedA
                     <img loading="lazy" src={imgSrc} alt={`${name}`} height="150px" />
                     <h1>{name}</h1>
                     <h3> {breed} </h3>
-                    {
-                        isAdopted ?
+                    {isAdopted ? (
                         <p>{`Apopted on ${dateParser(adoptedAt)}`}</p>
-
-                        : <p>{`Added on ${dateParser(dateAdded)}`}</p>
-
-                    }
+                    ) : (
+                        <p>{`Added on ${dateParser(dateAdded)}`}</p>
+                    )}
                 </>
             ) : (
                 <Card>

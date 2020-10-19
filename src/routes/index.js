@@ -5,7 +5,6 @@ import paths from './paths'
 
 import DogIndexPage from '../pages/DogIndexPage';
 import HomePage from '../pages/HomePage';
-import AdoptedDogIndexPage from '../pages/AdoptedDogsIndexPage';
 
 export const NotFound = () => {
     return (
@@ -22,7 +21,7 @@ export default (
     <Switch>
         <Route exact path={paths.home} component={HomePage} />
         <Route exact path={paths.dogsIndex} component={DogIndexPage} />
-        <Route exact path={paths.adoptedDogsIndex} component={AdoptedDogIndexPage} />
+        <Route exact path={paths.adoptedDogsIndex} component={DogIndexPage} />
         <Route component={NotFound} />
     </Switch>
 );
