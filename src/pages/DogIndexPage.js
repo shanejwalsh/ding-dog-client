@@ -5,9 +5,8 @@ import PageHeading from '../components/PageHeading';
 
 import * as API from '../services/API';
 
-const isAdoptedPage = window.location.pathname === '/adopted-dogs';
 
-const DogIndexPage = () => {
+const DogIndexPage = ({ isAdoptedPage }) => {
 
     const [dogs, setDogs] = useState();
     const [loading, setLoading] = useState(true);
@@ -23,6 +22,7 @@ const DogIndexPage = () => {
                 console.log(error);
             }
         }
+
         fetchData();
     }, []);
 
@@ -37,7 +37,7 @@ const DogIndexPage = () => {
                 </p>
 
                 {
-                    isAdoptedPage
+                    window.location.pathname === '/adopted-dogs'
                     ?
                     <p>
                         Definitely alive dogs

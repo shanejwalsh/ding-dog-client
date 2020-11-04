@@ -4,7 +4,7 @@ import Paginator from '../components/Paginator';
 import styled from 'styled-components';
 
 const Container = styled.div`
-    margin-left: 3rem;
+    /* margin-left: 3rem; */
 `;
 
 const renderDogCards = (dogs = []) => {
@@ -44,20 +44,18 @@ const DogCardContainer = ({ dogs, showAdopted }) => {
 
     return (
         <>
-            <div>
-                <Container className="dog-card-container">
-                    <Paginator
-                        itemsPerPage={10}
-                        style={{
-                            display: 'flex',
-                            flexWrap: 'wrap',
-                            gap: '1.25rem',
-                        }}
-                    >
-                        {renderDogCards(dogsToDisplay)}
-                    </Paginator>
-                </Container>
-            </div>
+            <Container className="container">
+                <Paginator
+                    itemsPerPage={10}
+                    style={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        gap: '1.25rem',
+                    }}
+                >
+                    {renderDogCards(dogsToDisplay)}
+                </Paginator>
+            </Container>
         </>
     );
 };
