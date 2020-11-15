@@ -11,10 +11,10 @@ interface T {
     isAdopted: boolean;
     dateAdded: Date;
     adoptedAt: Date;
-};
+}
 
 const Card = styled.div`
-    background: #fff;
+    background: var(--primary-color);
     border-radius: 10px;
     width: 375px;
     /* height: 300px; */
@@ -33,19 +33,13 @@ const DogCard = ({ name, breed, imgSrc, location, dateAdded, isAdopted, adoptedA
         <Card className="dog-card" onClick={() => setShowFront(!showFront)}>
             {showFront ? (
                 <>
-                    <div className="card-header" style={{  width: '50%' }}>
+                    <div className="card-header" style={{ width: '50%' }}>
                         <img
-
-                                    loading="lazy"
-
-                                           src={imgSrc}
-
-                             alt={`${name}`}
-
-                                    height="150px"
-
-                                           style={{  maxWidth: '100%'  }}
-
+                            loading="lazy"
+                            src={imgSrc}
+                            alt={`${name}`}
+                            height="150px"
+                            style={{ maxWidth: '100%' }}
                         />
                     </div>
                     <div className="card-body">

@@ -9,13 +9,22 @@ interface NavBarProps {
 }
 
 const StyledLink = styled.li`
-    margin: 0 0.5rem;
-    padding: 0 0.5rem;
     font-size: 1.25rem;
+    overflow: hidden;
 
-    &:hover {
-        text-decoration: underline;
-        text-decoration-color: green;
+    &::after {
+        content: '';
+        background-color: #5abcae;
+        display: block;
+        height: 2px;
+        margin-top: 5px;
+        width: 100%;
+        transform: translateX(-100%);
+    }
+
+    &:hover::after {
+        transition: transform 250ms ease-out;
+        transform: translate(0);
     }
 `;
 

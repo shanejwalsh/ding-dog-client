@@ -22,10 +22,7 @@ const HomePage = () => {
                     available.
                 </p>
                 <p>
-                    Or, if your heart needs warming you can browse through dogs
-                    <Link href='/'>
-                        who have already found their forever homes.
-                    </Link>
+                    Or, if your heart needs warming you can browse through dogs <Link to='/adopted-dogs'>who have already found their forever homes.</Link>
                 </p>
             </div>
         </div>

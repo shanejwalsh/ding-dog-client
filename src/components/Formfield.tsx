@@ -1,5 +1,4 @@
 import React from 'react';
-import { Tracing } from 'trace_events';
 
 interface FormfieldProps {
     className?: string;

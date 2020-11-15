@@ -1,4 +1,5 @@
 import React from 'react';
+import GlobalStyles from './globalStyles';
 import './App.css';
 
 import {Switch,  Router, Route, Link } from 'react-router-dom'
@@ -26,6 +27,7 @@ export const NotFound = () => {
 function App() {
     return (
         <div className="App">
+            <GlobalStyles />
             <Router
                 history={history}
             >
